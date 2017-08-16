@@ -16,12 +16,16 @@ def textBin(message):
 		binary.append(bin(ord(i))[2:])
 	return binary
 
-def steganography(text, image):
-	x = 0	
+def encode(text, image):
+	x = 0
+	print(text)	
 	for i in text:
 		for j in list(i):
 			image[x] = str(image[x])[:-1]+j
 			x+=1
+	for t in '00000011':
+		image[x] = str(image[x])[:-1]+t
+		x+=1
 	return image
 
 def imageSave(image, path, length):
@@ -44,12 +48,32 @@ def imageRGB(imageBin):
 			pixel = list()			
 	return newimage
 
+
+def decode(image):
+	x = 0
+	temp = str()
+	message = str()
+	for i in range(len(image)):
+		for j in range(8):
+			temp+=str(image[x])[-1]
+			x+=1
+		print(int(temp,2))
+		if temp != '00000011':
+			message+=temp
+			temp = str()
+		else:
+			break
+	print(int(message,2))		
+		
 image = Image.open('pepper50.bmp')
 length = image.size
 binarizada = imageBin(image)
-modified = steganography(textBin('J'),binarizada)
+modified = encode(textBin('J'),binarizada)
 t1 = imageRGB(binarizada)
 t2 = imageRGB(modified)
 imageSave(t2,'PeppersRGB.bmp', length)
-print(t1[0])
-print(t2[0])
+#testDecode = Image.open('modified_PeppersRGB.bmp')
+#decodeBin = imageBin(testDecode)
+#decode(decodeBin)
+#print(t1[0])
+#print(t2[0])
