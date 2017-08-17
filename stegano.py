@@ -2,7 +2,10 @@ from functions import *
 import sys
 
 if sys.argv[2] == 'encode':
-	image = Image.open(sys.argv[1])
+	try:
+		image = Image.open(sys.argv[1])
+	except IOError as e:
+		print('Não foi possível abrir o arquivo corretamente.')
 	if len(sys.argv[1])*8 < len(image.getdata()*3):
 		length = image.size
 		binarized = imageBin(image)
