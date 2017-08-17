@@ -5,7 +5,5 @@
 <ol>
   <li>caminho_do_arquivo: diretorio onde encontra-se a imagem para usar na esteganografia</li>
   <li>modo_de_operacao:encode ou decode (em lowercase)</li>
-  <li>mensagem: Este campo deve ser utilizado somente usando a tag Encode e toda a mensagem deve estar dentro de aspas duplas</li>
-
+  <li>mensagem: Este campo deve ser utilizado somente usando a tag encode em conjunto e toda a mensagem deve estar dentro de aspas duplas</li>
 </ol>
-
